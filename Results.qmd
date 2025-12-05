@@ -1,0 +1,47 @@
+S---
+title: "Untitled"
+format: html
+---
+
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt 
+```
+
+
+```{python}
+topic_sentiment = merged.groupby("lda_topic")["sentiment"].mean()
+```
+
+
+```{python}
+topic_sentiment.plot(kind="bar", figsize=(8,5))
+plt.title("Average Sentiment by Topic")
+plt.xlabel("Topic")
+plt.ylabel("Average Sentiment Score")
+plt.show()
+```
+
+
+```{python}
+merged.plot(kind="scatter", x="Price per Night", y="sentiment", alpha=0.3)
+plt.title("Hotel Price vs Sentiment Score")
+plt.show()
+
+```
+
+
+```{python}
+merged[["Price per Night", "sentiment"]].corr()
+
+```
+
+
+```{python}
+merged.boxplot(column="sentiment", by="lda_topic", figsize=(10,5))
+plt.title("Sentiment Distribution by Topic")
+plt.xlabel("Topic")
+plt.ylabel("Sentiment Score")
+plt.show()
+```

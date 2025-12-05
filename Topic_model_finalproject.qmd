@@ -1,0 +1,73 @@
+---
+title: "Untitled"
+format: html
+---
+
+
+```{python}
+from bertopic import BERTopic
+from bertopic.vectorizers import ClassTfidfTransformer
+# joblib is for saving and loading objects
+from joblib import load, dump
+import pandas as pd
+import numpy as np
+
+# gensim is for LDA
+import lda
+
+import pandas as pd
+import pprint as pprint
+
+import requests
+
+from sklearn.feature_extraction.text import CountVectorizer
+```
+
+```{python}
+merged = pd.read_csv("C:/Users/Alejandra Palomo/Unstructured Data/Final Project/merged_hotel_reviews_chi.csv")
+
+merged.head()
+merged["cleaned_review"].head()
+
+
+```
+
+```{python}
+vectorizer = CountVectorizer(stop_words="english")
+X = vectorizer.fit_transform(merged["cleaned_review"]) 
+```
+
+```{python}
+#LDA MODEL
+model = lda.LDA(n_topics=7, n_iter=500, random_state=1)
+model.fit(X)
+```
+
+```{python}
+topic_word = model.topic_word_
+vocab = vectorizer.get_feature_names_out()
+n_top_words = 10
+
+for i, topic_dist in enumerate(topic_word):
+    top_idx = topic_dist.argsort()[-n_top_words:]
+    topic_words = [vocab[j] for j in top_idx]
+    print(f"\nTopic {i}:")
+    print(", ".join(topic_words))
+```
+
+```{python}
+doc_topic = model.doc_topic_
+merged["lda_topic"] = doc_topic.argmax(axis=1)
+
+merged[["cleaned_review", "lda_topic"]].head()
+```
+
+
+```{python}
+merged.to_csv("merged_hotel_reviews_with_topics.csv", index=False)
+```
+
+
+```{python}
+merged.head()
+```
