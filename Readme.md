@@ -11,7 +11,7 @@ the analysis, the project proceeds in several stages: 1-Web Scraping of
 Hotel Data
 
 This script automates the process of collecting publicly available hotel
-data from Booking.com. Since bookin.com loads search results
+data from Booking.com. Since booking.com loads search results
 dynamically, the scraper uses Playwright’s asynchronous API to fully
 render the page before extracting information.
 
@@ -364,51 +364,6 @@ merged.to_csv("merged_hotel_reviews_with_topics.csv", index=False)
 merged.head()
 ```
 
-
-    Topic 0:
-    good, staff, downtown, walking, chicago, stay, great, close, hotel, location
-
-    Topic 1:
-    really, city, breakfast, view, great, good, pool, room, hotel, location
-
-    Topic 2:
-    loved, floor, staff, bed, nice, view, clean, stay, great, room
-
-    Topic 3:
-    come, pay, did, desk, stay, like, rooms, parking, room, hotel
-
-    Topic 4:
-    wonderful, stay, room, comfortable, clean, friendly, good, staff, great, location
-
-    Topic 5:
-    clean, value, amazing, nice, wonderful, good, great, parking, hotel, location
-
-    Topic 6:
-    excellent, nice, coffee, shower, water, staff, room, location, good, breakfast
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-&#10;    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&#10;    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-|  | Hotel Name | cleaned_review | sentiment | Rating | Price per Night | URL | lda_topic |
-|----|----|----|----|----|----|----|----|
-| 0 | Chicago South Loop Hotel | The place gave a creepy vibe, mostly because l... | -0.2960 | 6.3 | 76 | https://www.booking.com/hotel/us/chicago-south... | 1 |
-| 1 | Chicago South Loop Hotel | Good price marathon weekend a 3 star hotel Fri... | 0.8827 | 6.3 | 76 | https://www.booking.com/hotel/us/chicago-south... | 1 |
-| 2 | Chicago South Loop Hotel | It average Close town Noise night | 0.0000 | 6.3 | 76 | https://www.booking.com/hotel/us/chicago-south... | 0 |
-| 3 | Chicago South Loop Hotel | Comfortable quite just outside downtown. The b... | 0.9790 | 6.3 | 76 | https://www.booking.com/hotel/us/chicago-south... | 3 |
-| 4 | Chicago South Loop Hotel | Had a great comfortable stay Staff excellent, ... | 0.9527 | 6.3 | 76 | https://www.booking.com/hotel/us/chicago-south... | 4 |
-
-</div>
-
 5-Visualizations To explore the relationship between hotel
 characteristics, customer sentiment, and the topics extracted from
 reviews, I generated several visualizations. First, a bar chart of
@@ -452,8 +407,46 @@ plt.ylabel("Sentiment Score")
 plt.show()
 ```
 
-![](Readme_files/figure-commonmark/cell-6-output-1.png)
+All in all, this project highlights how unstructured customer reviews
+can be transformed into meaningful insights through data collection,
+text cleaning, sentiment analysis, and topic modeling. By scraping hotel
+listings and review content from Booking.com and preparing the text for
+analysis, the results help clarify which parts of the hotel experience
+matter most to guests. Cleanliness, comfort, location, and interactions
+with staff consistently appeared in reviews with the strongest positive
+sentiment, suggesting that guests value reliable service and the
+essential components of a comfortable stay. In contrast, issues related
+to parking, fees, and perceived value tended to generate noticeably more
+negative reactions, even when other aspects of the stay were
+satisfactory.
 
-![](Readme_files/figure-commonmark/cell-6-output-2.png)
+A key finding from the analysis is that price alone does not predict
+whether reviews are positive or negative. Instead, guests seem to
+respond more to whether their expectations were met. This makes
+consistency in service quality more influential than price point.
+Together, the sentiment patterns and recurring themes offer a clearer
+understanding of the experiences that shape how guests evaluate their
+stays.
 
-![](Readme_files/figure-commonmark/cell-6-output-3.png)
+Limitations
+
+While the analysis provides meaningful insight into guest sentiment,
+several limitations should be acknowledged. The project scraped only
+about 75 hotels and collected a limited number of reviews per property,
+capturing just a small portion of all reviews available on Booking.com.
+Many Chicago hotels did not appear in the initial search results, and
+even for those that did, the analysis reflects only the reviews
+displayed on the first page at the time of scraping. Additionally, all
+data was collected from a single search tied to one specific check-in
+and check-out date, which affects which hotels appear, how they are
+priced, and how many reviews are visible. Because the dataset represents
+only one city and one moment in time, the findings should be interpreted
+as a snapshot rather than a comprehensive picture of hotel sentiment
+across Chicago or the broader hotel market.
+
+Although this project focuses only on Chicago hotels and uses a limited
+set of reviews, the overall workflow is flexible and could be applied to
+larger datasets or other cities. With more data, the same approach could
+support broader comparisons, track changes over time, or help
+hospitality businesses better understand how specific elements of the
+guest experience influence overall satisfaction.

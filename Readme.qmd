@@ -6,7 +6,7 @@ This repository explores what customers value in hotel stays by analyzing Bookin
 To complete the analysis, the project proceeds in several stages: 
 1-Web Scraping of Hotel Data
 
-This script automates the process of collecting publicly available hotel data from Booking.com. Since bookin.com loads search results dynamically, the scraper uses Playwright’s asynchronous API to fully render the page before extracting information.
+This script automates the process of collecting publicly available hotel data from Booking.com. Since booking.com loads search results dynamically, the scraper uses Playwright’s asynchronous API to fully render the page before extracting information.
 ```{python}
 #| eval: false 
 import pandas as pd
@@ -294,6 +294,7 @@ This script performs topic modeling on the cleaned hotel review text using LDA. 
 
 
 ```{python}
+#| eval: false
 from bertopic import BERTopic
 from bertopic.vectorizers import ClassTfidfTransformer
 # joblib is for saving and loading objects
@@ -348,6 +349,7 @@ To explore the relationship between hotel characteristics, customer sentiment, a
 
 
 ```{python}
+#| eval: false
 import pandas as pd
 import matplotlib.pyplot as plt 
 
@@ -375,3 +377,14 @@ plt.ylabel("Sentiment Score")
 plt.show()
 
 ```
+
+
+All in all, this project highlights how unstructured customer reviews can be transformed into meaningful insights through data collection, text cleaning, sentiment analysis, and topic modeling. By scraping hotel listings and review content from Booking.com and preparing the text for analysis, the results help clarify which parts of the hotel experience matter most to guests. Cleanliness, comfort, location, and interactions with staff consistently appeared in reviews with the strongest positive sentiment, suggesting that guests value reliable service and the essential components of a comfortable stay. In contrast, issues related to parking, fees, and perceived value tended to generate noticeably more negative reactions, even when other aspects of the stay were satisfactory.
+
+A key finding from the analysis is that price alone does not predict whether reviews are positive or negative. Instead, guests seem to respond more to whether their expectations were met. This makes consistency in service quality more influential than price point. Together, the sentiment patterns and recurring themes offer a clearer understanding of the experiences that shape how guests evaluate their stays.
+
+Limitations
+
+While the analysis provides meaningful insight into guest sentiment, several limitations should be acknowledged. The project scraped only about 75 hotels and collected a limited number of reviews per property, capturing just a small portion of all reviews available on Booking.com. Many Chicago hotels did not appear in the initial search results, and even for those that did, the analysis reflects only the reviews displayed on the first page at the time of scraping. Additionally, all data was collected from a single search tied to one specific check-in and check-out date, which affects which hotels appear, how they are priced, and how many reviews are visible. Because the dataset represents only one city and one moment in time, the findings should be interpreted as a snapshot rather than a comprehensive picture of hotel sentiment across Chicago or the broader hotel market.
+
+Although this project focuses only on Chicago hotels and uses a limited set of reviews, the overall workflow is flexible and could be applied to larger datasets or other cities. With more data, the same approach could support broader comparisons, track changes over time, or help hospitality businesses better understand how specific elements of the guest experience influence overall satisfaction.
